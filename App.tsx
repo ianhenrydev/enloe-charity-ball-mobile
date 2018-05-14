@@ -1,14 +1,47 @@
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { View, StyleSheet, Dimensions } from 'react-native';
+import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
 
-export default class App extends React.Component<{}> {
+const initialLayout = {
+  height: 0,
+  width: Dimensions.get('window').width,
+};
+
+const FirstRoute = () => <View style={[ styles.container, { backgroundColor: '#ff4081' } ]} />;
+const SecondRoute = () => <View style={[ styles.container, { backgroundColor: '#673ab7' } ]} />;
+
+type IState = {
+  index: Number;
+  routes: {key: string, title: string}[];
+}
+
+export default class App extends React.Component<{}, IState> {
+  state = {
+    index: 0,
+    routes: [
+      { key: 'first', title: 'First' },
+      { key: 'second', title: 'econd' }
+    ],
+  };
+  
+  private handleIndexChange = (index: Number) => this.setState({ index });
+
+  private renderHeader = (props: any) => <TabBar {...props}/>;
+
+  _renderScene = SceneMap({
+    first: FirstRoute,
+    second: SecondRoute,
+  });
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.ts to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
+      <TabViewAnimated
+        navigationState={this.state}
+        renderScene={this._renderScene}
+        renderHeader={this.renderHeader}
+        onIndexChange={this.handleIndexChange}
+        initialLayout={initialLayout}
+      />
     );
   }
 }
@@ -16,8 +49,5 @@ export default class App extends React.Component<{}> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
