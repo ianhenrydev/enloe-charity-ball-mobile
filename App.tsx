@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, StyleSheet, Dimensions, Platform } from 'react-native';
+import { View, StyleSheet, Dimensions, Platform, WebView } from 'react-native';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
 import About from './src/About';
 
@@ -8,22 +8,20 @@ const initialLayout = {
   width: Dimensions.get('window').width,
 };
 
-const FirstRoute = () => <View style={[ styles.container, { backgroundColor: '#ff4081' } ]} />;
-const SecondRoute = () => <View style={[ styles.container, { backgroundColor: '#673ab7' } ]} />;
-const ThirdRoute = () => <View style={[ styles.container, { backgroundColor: '#673ab7' } ]} />;
-
 type IState = {
   index: Number;
   routes: {key: string, title: string}[];
 }
 
+const twitter = '<a class="twitter-timeline" href="https://twitter.com/EHSCharityBall?ref_src=twsrc%5Etfw">Tweets by EHSCharityBall</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>';
 export default class App extends React.Component<{}, IState> {
   state = {
     index: 0,
     routes: [
-      { key: 'first', title: 'About' },
-      { key: 'second', title: 'Twitter' },
-      { key: 'third', title: 'Blog' }
+      { key: 'about', title: 'About' },
+      { key: 'twitter', title: 'Twitter' },
+      { key: 'blog', title: 'Blog' },
+      { key: 'calendar', title: 'Cal' }
     ],
   };
   
@@ -31,10 +29,11 @@ export default class App extends React.Component<{}, IState> {
 
   private renderHeader = (props: any) => <TabBar style={styles.tabBar} indicatorStyle={styles.indicator} {...props}/>;
 
-  _renderScene = SceneMap({
-    first: () => <About/>,
-    second: SecondRoute,
-    third: SecondRoute,
+  private renderScene = SceneMap({
+    about: () => <About/>,
+    twitter: () => <WebView source={{html: twitter}} javaScriptEnabled={true}/>,
+    blog: () => <WebView source={{uri: 'https://enloecharityball.wordpress.com/'}}/>,
+    calendar: () => <WebView source={{uri: 'http://www.enloestudentcouncil.com/calendar.html'}}/>,
   });
 
   render() {
@@ -42,7 +41,7 @@ export default class App extends React.Component<{}, IState> {
       <TabViewAnimated
         style={styles.tabView}
         navigationState={this.state}
-        renderScene={this._renderScene}
+        renderScene={this.renderScene}
         renderHeader={this.renderHeader}
         onIndexChange={this.handleIndexChange}
         initialLayout={initialLayout}
