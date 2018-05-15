@@ -4,6 +4,15 @@
     "packagerOpts": {
       "sourceExts": ["ts", "tsx"],
       "transformer": "node_modules/react-native-typescript-transformer/index.js"
+    },
+    "name": "Enloe Charity Ball",
+    "version": "0.0.1",
+    "slug": "enloe-charity-ball",
+    "ios": {
+      "bundleIdentifier": "com.enloestudentcouncil.charityball"
+    },
+    "android": {
+      "package": "com.enloestudentcouncil.charityball"
     }
   }
 }

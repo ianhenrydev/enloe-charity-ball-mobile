@@ -95,5 +95,8 @@ const styles = StyleSheet.create({
   donationText: {
       alignSelf: 'center',
       fontSize: 22,
-  }
+  },
+  loading: {
+
+  },
 });
