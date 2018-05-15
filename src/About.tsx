@@ -1,11 +1,51 @@
 import * as React from 'react';
 import { ActivityIndicator, Image, Text, TextInput, TouchableOpacity, StyleSheet, View, ProgressBarAndroid, Platform, ProgressViewIOS, ScrollView } from 'react-native';
+import firebase from 'firebase';
+require("firebase/firestore");
 
-export default class About extends React.Component<{}> {
-    private donationTotal: number = 14321;
+const firebaseConfig = {
+  apiKey: "AIzaSyCWfpor5IAdpqZtQiEWbYMh3525Cpt8tJs",
+  authDomain: "enloe-charity-ball.firebaseapp.com",
+  databaseURL: "https://enloe-charity-ball.firebaseio.com",
+  projectId: "enloe-charity-ball",
+  storageBucket: "",
+  messagingSenderId: "540378669019"
+};
+
+type IState = {
+  donationTotal: number;
+  loading: boolean;
+}
+
+export default class About extends React.Component<{}, IState> {
+  state = {
+    donationTotal: 0,
+    loading: false,
+  };
+
+  componentDidMount() {
+    this.setState({ loading: true });
+    firebase.initializeApp(firebaseConfig);
+    console.log(`Firebase Initialized SDK: ${firebase.SDK_VERSION}`);
+    const firestore = firebase.firestore();
+    firestore.settings({ timestampsInSnapshots: true })
+    firestore.collection("info").doc('about').get().then((doc) => {
+      if (doc.exists) {
+        this.setState({donationTotal: doc.get('donation_total'), loading: false});
+      } else {
+          console.log("No such document!");
+          this.setState({ loading: false });
+      }
+    }).catch(function(error) {
+      console.log("Error getting document:", error);
+    });
+  }
+
   render() {
-      const percent = this.donationTotal / 150000;
-    return (
+    const percent = this.state.donationTotal / 150000;
+    return ( 
+      this.state.loading ? 
+      <ActivityIndicator size="large" color="#0000ff" /> :
       <View style={styles.container}>
         <ScrollView style={styles.scrollView}>
             <Text style={styles.titleText}>Enloe Charity Ball 2018</Text>
@@ -22,7 +62,7 @@ export default class About extends React.Component<{}> {
             <Text style={styles.normalText}>We are alive with purpose.</Text>
         </ScrollView>
         <View style={styles.donationView}>
-            <Text style={styles.donationText}>{`$${this.donationTotal} Donated`}</Text>
+            <Text style={styles.donationText}>{`$${this.state.donationTotal} Donated`}</Text>
             { (Platform.OS === 'ios') ? <ProgressViewIOS/> : <ProgressBarAndroid styleAttr='Horizontal' progress={percent} indeterminate={false} color='#43a047'/>}
         </View>
       </View>
