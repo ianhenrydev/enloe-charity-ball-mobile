@@ -8,6 +8,7 @@
     "name": "Enloe Charity Ball",
     "version": "0.0.1",
     "slug": "enloe-charity-ball",
+    "icon": "./assets/icon.png",
     "ios": {
       "bundleIdentifier": "com.enloestudentcouncil.charityball"
     },

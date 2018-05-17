@@ -2,6 +2,7 @@ import * as React from 'react';
 import { View, StyleSheet, Dimensions, Platform, WebView } from 'react-native';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
 import About from './src/About';
+import CalendarScreen from './src/CalendarScreen';
 
 const initialLayout = {
   height: 0,
@@ -19,9 +20,8 @@ export default class App extends React.Component<{}, IState> {
     index: 0,
     routes: [
       { key: 'about', title: 'About' },
-      { key: 'twitter', title: 'Twitter' },
-      { key: 'blog', title: 'Blog' },
-      { key: 'calendar', title: 'Cal' }
+      { key: 'calendar', title: 'Calendar' },
+      { key: 'gallery', title: 'Gallery' }
     ],
   };
   
@@ -31,9 +31,10 @@ export default class App extends React.Component<{}, IState> {
 
   private renderScene = SceneMap({
     about: () => <About/>,
-    twitter: () => <WebView source={{html: twitter}} javaScriptEnabled={true}/>,
-    blog: () => <WebView source={{uri: 'https://enloecharityball.wordpress.com/'}}/>,
-    calendar: () => <WebView source={{uri: 'http://www.enloestudentcouncil.com/calendar.html'}}/>,
+    calendar: () => <CalendarScreen/>,
+    gallery: () => <View/>,
+    //twitter: () => <WebView source={{html: twitter}} javaScriptEnabled={true}/>,
+    //blog: () => <WebView source={{uri: 'https://enloecharityball.wordpress.com/'}}/>,
   });
 
   render() {
