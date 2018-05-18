@@ -54,7 +54,6 @@ export default class App extends React.Component<{}, IState> {
 
 const styles = StyleSheet.create({
   tabView: {
-    marginTop: (Platform.OS === 'ios') ? 20 : 24,
   },
   tabBar: {
     backgroundColor: '#43a047',

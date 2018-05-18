@@ -20,7 +20,7 @@ export default class GalleryScreen extends React.Component<{}, IState> {
                 <ListView
                     contentContainerStyle={styles.list}
                     dataSource={this.state.dataSource}
-                    renderRow={(rowData) => <View style={styles.item}><Image style={{width: 160, height: 160}} source={require('../assets/icon.png')}/></View>}
+                    renderRow={(rowData) => <View style={styles.item}><Image style={{width: 150, height: 150}} source={require('../assets/icon.png')}/></View>}
                 />
             </View>
         );

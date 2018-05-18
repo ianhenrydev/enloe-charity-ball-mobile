@@ -9,6 +9,15 @@
     "version": "0.0.1",
     "slug": "enloe-charity-ball",
     "icon": "./assets/icon.png",
+    "primaryColor": "#43a047",
+    "androidStatusBar": {
+      "barStyle": "light-content",
+      "backgroundColor": "#00701a"
+    },
+    "splash": {
+      "backgroundColor": "#fff",
+      "resizeMode": "contain"
+    },
     "ios": {
       "bundleIdentifier": "com.enloestudentcouncil.charityball"
     },

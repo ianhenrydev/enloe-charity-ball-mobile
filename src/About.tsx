@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ActivityIndicator, Image, Text, TextInput, TouchableOpacity, StyleSheet, View, ProgressBarAndroid, Platform, ProgressViewIOS, ScrollView, Linking } from 'react-native';
+import { Alert, ActivityIndicator, Image, Text, TextInput, TouchableOpacity, StyleSheet, View, ProgressBarAndroid, Platform, ProgressViewIOS, ScrollView, Linking } from 'react-native';
 import firebase from 'firebase';
 require("firebase/firestore");
 
@@ -14,12 +14,14 @@ const firebaseConfig = {
 
 type IState = {
   donationTotal: number;
+  message: string;
   loading: boolean;
 }
 
 export default class About extends React.Component<{}, IState> {
   state = {
     donationTotal: 0,
+    message: "",
     loading: false,
   };
 
@@ -31,7 +33,7 @@ export default class About extends React.Component<{}, IState> {
     firestore.settings({ timestampsInSnapshots: true })
     firestore.collection("info").doc('about').get().then((doc) => {
       if (doc.exists) {
-        this.setState({donationTotal: doc.get('donation_total'), loading: false});
+        this.setState({donationTotal: doc.get('donation_total'), message: doc.get('message'), loading: false});
       } else {
           console.log("No such document!");
           this.setState({ loading: false });
@@ -47,11 +49,14 @@ export default class About extends React.Component<{}, IState> {
       <View style={styles.container}>
         <ScrollView style={styles.scrollView}>
             <Text style={styles.titleText}>Enloe Charity Ball 2018</Text>
-            <Image style={styles.image} source={require('../assets/partnership-end-homelessness.png')}/>
+            <View style={styles.messageCard}>
+              { this.state.loading ? <ActivityIndicator color="#0000ff" /> : <Text style={styles.normalText}>{this.state.message}</Text>}
+            </View>
             <Text style={styles.normalText}>What? Enloe's 13th annual Charity Ball</Text>
             <Text style={styles.normalText}>When? December 9, 2017 from 7-11 PM</Text>
             <Text style={styles.normalText}>Where? Marbles Kids Museum in Downtown Raleigh</Text>
             <Text style={styles.normalText}>Who? Enloe High School partnering with the Raleigh-Wake Partnership to end Homelessness</Text>
+            <Image style={styles.image} source={require('../assets/partnership-end-homelessness.png')}/>
             <Text style={styles.normalText}>Why? To help us raise $150,000 for the Raleigh-Wake Partnership to end Homelessness</Text>
             <Text style={styles.normalText}>How? Buy your ticket or donate online by clicking here</Text>
             <Text style={styles.normalText}>Our teams worked on several facets during Charity Ball season. Updates on 2018 teams coming soon!</Text>
@@ -70,13 +75,27 @@ export default class About extends React.Component<{}, IState> {
           { this.state.loading ? 
             <ActivityIndicator size="large" color="#0000ff" /> :
             <View>
-              <Text style={styles.donationText}>{`$${this.state.donationTotal} Donated`}</Text>
-              { (Platform.OS === 'ios') ? <ProgressViewIOS/> : <ProgressBarAndroid styleAttr='Horizontal' progress={percent} indeterminate={false} color='#43a047'/>}
+              <Text style={styles.donationText}>{`$${this.state.donationTotal}`}</Text>
+              { (Platform.OS === 'ios') ? <ProgressViewIOS progress={percent}/> : <ProgressBarAndroid styleAttr='Horizontal' progress={percent} indeterminate={false} color='#43a047'/>}
+              <TouchableOpacity onPress={this.donate} style={styles.button}>
+                <Text style={styles.buttonText}>Donate Now</Text>
+              </TouchableOpacity>
             </View>
           }
         </View>
       </View>
     );
+  }
+
+  private donate = () => {
+    Alert.alert(
+      'Coming Soon',
+      'The donation portal will be online soon',
+      [
+        {text: 'OK', onPress: () => console.log('OK Pressed')},
+      ],
+      { cancelable: true }
+    )
   }
 
   private openBlog = () => {
@@ -92,14 +111,22 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   image: {
-    width: 300,
-    height: 80,
+    width: 250,
+    height: 50,
     alignSelf: 'center',
     marginBottom: 10,
   },
   scrollView: {
     padding: 20,
     flex: 1,
+  },
+  messageCard: {
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#000',
+    padding: 5,
+    justifyContent: 'center',
+    marginBottom: 10,
   },
   titleText: {
     fontSize: 24,
@@ -113,7 +140,9 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   donationView: {
-    padding: 10,  
+    padding: 5,
+    borderTopWidth: 1,
+    borderColor: '#424242',
   },
   donationText: {
       alignSelf: 'center',
