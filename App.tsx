@@ -3,6 +3,7 @@ import { View, StyleSheet, Dimensions, Platform, WebView } from 'react-native';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
 import About from './src/About';
 import CalendarScreen from './src/CalendarScreen';
+import GalleryScreen from './src/GalleryScreen';
 
 const initialLayout = {
   height: 0,
@@ -32,7 +33,7 @@ export default class App extends React.Component<{}, IState> {
   private renderScene = SceneMap({
     about: () => <About/>,
     calendar: () => <CalendarScreen/>,
-    gallery: () => <View/>,
+    gallery: () => <GalleryScreen/>,
     //twitter: () => <WebView source={{html: twitter}} javaScriptEnabled={true}/>,
     //blog: () => <WebView source={{uri: 'https://enloecharityball.wordpress.com/'}}/>,
   });

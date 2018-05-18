@@ -36,5 +36,6 @@ const styles = StyleSheet.create({
   },
   dateText: {
     fontSize: 22,
+    marginBottom: 10,
   }
 });

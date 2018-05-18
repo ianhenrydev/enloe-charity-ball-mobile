@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ActivityIndicator, Image, Text, TextInput, TouchableOpacity, StyleSheet, View, ProgressBarAndroid, Platform, ProgressViewIOS, ScrollView } from 'react-native';
+import { ActivityIndicator, Image, Text, TextInput, TouchableOpacity, StyleSheet, View, ProgressBarAndroid, Platform, ProgressViewIOS, ScrollView, Linking } from 'react-native';
 import firebase from 'firebase';
 require("firebase/firestore");
 
@@ -44,11 +44,10 @@ export default class About extends React.Component<{}, IState> {
   render() {
     const percent = this.state.donationTotal / 150000;
     return ( 
-      this.state.loading ? 
-      <ActivityIndicator size="large" color="#0000ff" /> :
       <View style={styles.container}>
         <ScrollView style={styles.scrollView}>
             <Text style={styles.titleText}>Enloe Charity Ball 2018</Text>
+            <Image style={styles.image} source={require('../assets/partnership-end-homelessness.png')}/>
             <Text style={styles.normalText}>What? Enloe's 13th annual Charity Ball</Text>
             <Text style={styles.normalText}>When? December 9, 2017 from 7-11 PM</Text>
             <Text style={styles.normalText}>Where? Marbles Kids Museum in Downtown Raleigh</Text>
@@ -60,19 +59,43 @@ export default class About extends React.Component<{}, IState> {
             <Text style={styles.normalText}>Members of student council and the community also collaborate on an Enloe Charity Ball Blog.</Text>
             <Text style={styles.normalText}>To inspire and impact our community through innovative, student-led solutions</Text>
             <Text style={styles.normalText}>We are alive with purpose.</Text>
+            <TouchableOpacity onPress={this.openBlog} style={styles.button}>
+              <Text style={styles.buttonText}>Blog</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={this.openTwitter} style={styles.button}>
+              <Text style={styles.buttonText}>Twitter</Text>
+            </TouchableOpacity>
         </ScrollView>
         <View style={styles.donationView}>
-            <Text style={styles.donationText}>{`$${this.state.donationTotal} Donated`}</Text>
-            { (Platform.OS === 'ios') ? <ProgressViewIOS/> : <ProgressBarAndroid styleAttr='Horizontal' progress={percent} indeterminate={false} color='#43a047'/>}
+          { this.state.loading ? 
+            <ActivityIndicator size="large" color="#0000ff" /> :
+            <View>
+              <Text style={styles.donationText}>{`$${this.state.donationTotal} Donated`}</Text>
+              { (Platform.OS === 'ios') ? <ProgressViewIOS/> : <ProgressBarAndroid styleAttr='Horizontal' progress={percent} indeterminate={false} color='#43a047'/>}
+            </View>
+          }
         </View>
       </View>
     );
+  }
+
+  private openBlog = () => {
+    Linking.openURL('https://enloecharityball.wordpress.com/')
+  }
+  private openTwitter = () => {
+    Linking.openURL('https://twitter.com/EHSCharityBall')
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  image: {
+    width: 300,
+    height: 80,
+    alignSelf: 'center',
+    marginBottom: 10,
   },
   scrollView: {
     padding: 20,
@@ -98,5 +121,18 @@ const styles = StyleSheet.create({
   },
   loading: {
 
+  },
+  button: {
+    backgroundColor: '#43a047',
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#43a047',
+    margin: 10,
+    alignItems: 'center',
+    padding: 5,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
   },
 });
