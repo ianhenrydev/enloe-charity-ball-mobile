@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Alert, ActivityIndicator, Image, Text, TextInput, TouchableOpacity, StyleSheet, View, ProgressBarAndroid, Platform, ProgressViewIOS, ScrollView, Linking } from 'react-native';
 import firebase from 'firebase';
 require("firebase/firestore");
+import Card from './Components/Card';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCWfpor5IAdpqZtQiEWbYMh3525Cpt8tJs",
@@ -18,7 +19,7 @@ type IState = {
   loading: boolean;
 }
 
-export default class About extends React.Component<{}, IState> {
+export default class AboutScreen extends React.Component<{}, IState> {
   state = {
     donationTotal: 0,
     message: "",
@@ -49,9 +50,9 @@ export default class About extends React.Component<{}, IState> {
       <View style={styles.container}>
         <ScrollView style={styles.scrollView}>
             <Text style={styles.titleText}>Enloe Charity Ball 2018</Text>
-            <View style={styles.messageCard}>
-              { this.state.loading ? <ActivityIndicator color="#0000ff" /> : <Text style={styles.normalText}>{this.state.message}</Text>}
-            </View>
+            <Card>
+              { this.state.loading ? <ActivityIndicator color="#0000ff" /> : <Text style={styles.cardText}>{this.state.message}</Text>}
+            </Card>
             <Text style={styles.normalText}>What? Enloe's 13th annual Charity Ball</Text>
             <Text style={styles.normalText}>When? December 9, 2017 from 7-11 PM</Text>
             <Text style={styles.normalText}>Where? Marbles Kids Museum in Downtown Raleigh</Text>
@@ -76,7 +77,7 @@ export default class About extends React.Component<{}, IState> {
             <ActivityIndicator size="large" color="#0000ff" /> :
             <View>
               <Text style={styles.donationText}>{`$${this.state.donationTotal}`}</Text>
-              { (Platform.OS === 'ios') ? <ProgressViewIOS progress={percent}/> : <ProgressBarAndroid styleAttr='Horizontal' progress={percent} indeterminate={false} color='#43a047'/>}
+              { (Platform.OS === 'ios') ? <ProgressViewIOS progress={percent} progressTintColor='#43a047' style={{height: 15}}/> : <ProgressBarAndroid styleAttr='Horizontal' progress={percent} indeterminate={false} color='#43a047'/>}
               <TouchableOpacity onPress={this.donate} style={styles.button}>
                 <Text style={styles.buttonText}>Donate Now</Text>
               </TouchableOpacity>
@@ -120,14 +121,6 @@ const styles = StyleSheet.create({
     padding: 20,
     flex: 1,
   },
-  messageCard: {
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: '#000',
-    padding: 5,
-    justifyContent: 'center',
-    marginBottom: 10,
-  },
   titleText: {
     fontSize: 24,
     alignSelf: 'center',
@@ -139,10 +132,13 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     marginBottom: 10,
   },
+  cardText: {
+    fontSize: 18,
+  },
   donationView: {
     padding: 5,
     borderTopWidth: 1,
-    borderColor: '#424242',
+    borderColor: '#BDBDBD',
   },
   donationText: {
       alignSelf: 'center',

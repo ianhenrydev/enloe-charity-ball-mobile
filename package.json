@@ -13,7 +13,7 @@
     "react-test-renderer": "16.3.0-alpha.1",
     "ts-jest": "^22.4.2",
     "tslib": "^1.9.0",
-    "typescript": "^2.8.1"
+    "typescript": "^2.8.3"
   },
   "main": "./node_modules/react-native-scripts-ts/build/bin/crna-entry.js",
   "scripts": {
@@ -50,6 +50,7 @@
     "@types/react-native-tab-view": "^0.0.3",
     "expo": "^26.0.0",
     "firebase": "^5.0.2",
+    "global": "^4.3.2",
     "react": "16.3.0-alpha.1",
     "react-native": "0.54.0",
     "react-native-calendars": "^1.19.3",

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, StyleSheet, Dimensions, Platform, WebView } from 'react-native';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
-import About from './src/About';
+import AboutScreen from './src/AboutScreen';
 import CalendarScreen from './src/CalendarScreen';
 import GalleryScreen from './src/GalleryScreen';
 
@@ -31,11 +31,9 @@ export default class App extends React.Component<{}, IState> {
   private renderHeader = (props: any) => <TabBar style={styles.tabBar} indicatorStyle={styles.indicator} {...props}/>;
 
   private renderScene = SceneMap({
-    about: () => <About/>,
+    about: () => <AboutScreen/>,
     calendar: () => <CalendarScreen/>,
     gallery: () => <GalleryScreen/>,
-    //twitter: () => <WebView source={{html: twitter}} javaScriptEnabled={true}/>,
-    //blog: () => <WebView source={{uri: 'https://enloecharityball.wordpress.com/'}}/>,
   });
 
   render() {
@@ -54,6 +52,7 @@ export default class App extends React.Component<{}, IState> {
 
 const styles = StyleSheet.create({
   tabView: {
+    marginTop: (Platform.OS === 'ios') ? 20 : 0,
   },
   tabBar: {
     backgroundColor: '#43a047',
