@@ -3,15 +3,7 @@ import { Alert, ActivityIndicator, Image, Text, TextInput, TouchableOpacity, Sty
 import firebase from 'firebase';
 require("firebase/firestore");
 import Card from './Components/Card';
-
-const firebaseConfig = {
-  apiKey: "AIzaSyCWfpor5IAdpqZtQiEWbYMh3525Cpt8tJs",
-  authDomain: "enloe-charity-ball.firebaseapp.com",
-  databaseURL: "https://enloe-charity-ball.firebaseio.com",
-  projectId: "enloe-charity-ball",
-  storageBucket: "",
-  messagingSenderId: "540378669019"
-};
+import { firebaseConfig, PRIMARY_COLOR } from './Constants';
 
 type IState = {
   donationTotal: number;
@@ -47,44 +39,32 @@ export default class AboutScreen extends React.Component<{}, IState> {
   render() {
     const percent = this.state.donationTotal / 150000;
     return ( 
-      <View style={styles.container}>
         <ScrollView style={styles.scrollView}>
-            <Text style={styles.titleText}>Enloe Charity Ball 2018</Text>
-            <Card>
+            <Text style={{ fontSize: 26, fontWeight: 'bold', marginBottom: 20}}>Enloe Charity Ball 2018</Text>
+            <Card title='Total Raised'>
+              <Text style={{ fontSize: 18 }}>{`$${this.state.donationTotal} of $150,000 goal`}</Text>
+              { (Platform.OS === 'ios') ? <ProgressViewIOS progress={percent} progressTintColor={PRIMARY_COLOR}/> : <ProgressBarAndroid styleAttr='Horizontal' progress={percent} indeterminate={false} color={PRIMARY_COLOR}/>}
+              <TouchableOpacity onPress={this.donate} style={styles.button}>
+                <Text style={styles.buttonText}>Donate Now</Text>
+              </TouchableOpacity>
+            </Card>
+            <Card title='Recent News'>
               { this.state.loading ? <ActivityIndicator color="#0000ff" /> : <Text style={styles.cardText}>{this.state.message}</Text>}
             </Card>
-            <Text style={styles.normalText}>What? Enloe's 13th annual Charity Ball</Text>
-            <Text style={styles.normalText}>When? December 9, 2017 from 7-11 PM</Text>
-            <Text style={styles.normalText}>Where? Marbles Kids Museum in Downtown Raleigh</Text>
-            <Text style={styles.normalText}>Who? Enloe High School partnering with the Raleigh-Wake Partnership to end Homelessness</Text>
-            <Image style={styles.image} source={require('../assets/partnership-end-homelessness.png')}/>
-            <Text style={styles.normalText}>Why? To help us raise $150,000 for the Raleigh-Wake Partnership to end Homelessness</Text>
-            <Text style={styles.normalText}>How? Buy your ticket or donate online by clicking here</Text>
-            <Text style={styles.normalText}>Our teams worked on several facets during Charity Ball season. Updates on 2018 teams coming soon!</Text>
-            <Text style={styles.normalText}>There were also several fundraising events we plan and host for Charity Ball. Learn about them here.</Text>
-            <Text style={styles.normalText}>Members of student council and the community also collaborate on an Enloe Charity Ball Blog.</Text>
-            <Text style={styles.normalText}>To inspire and impact our community through innovative, student-led solutions</Text>
-            <Text style={styles.normalText}>We are alive with purpose.</Text>
+            <Card title='Mission'>
+              <Text style={styles.normalText}>To inspire student leaders and impact our communities through innovative, student-lead solutions.</Text>
+            </Card>
+            <Card title='History'>
+              <Text style={styles.normalText}>Charity Ball began in 2004. Students sold tickets for the ball and held a silent auction to raise over $2,000 for Haven House. Each year since, students have chosen a local non-profit to be the beneficiary of Enloe Student Council’s annual fundraising effort which takes place October to December. Enloe students are now preparing for the 14th Annual Charity Ball. Each class has created their own innovative events and ideas to fundraise for and get involved with our annual partner. Events like Space Jam (a concert featuring local student performers), an Art Auction, a Twitter Takeover and more have been added over the course of several years, to the Charity Ball “season.” These new ideas help students increase the fundraising goal from year to year; each consecutive Charity Ball has raised more than the last. In 2017, students raised over $180,000 for The Raleigh-Wake Partnership to End and Prevent Homelessness.</Text>
+            </Card>
             <TouchableOpacity onPress={this.openBlog} style={styles.button}>
               <Text style={styles.buttonText}>Blog</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={this.openTwitter} style={styles.button}>
               <Text style={styles.buttonText}>Twitter</Text>
             </TouchableOpacity>
+            <View style={{height: 30}}/>
         </ScrollView>
-        <View style={styles.donationView}>
-          { this.state.loading ? 
-            <ActivityIndicator size="large" color="#0000ff" /> :
-            <View>
-              <Text style={styles.donationText}>{`$${this.state.donationTotal}`}</Text>
-              { (Platform.OS === 'ios') ? <ProgressViewIOS progress={percent} progressTintColor='#43a047' style={{height: 15}}/> : <ProgressBarAndroid styleAttr='Horizontal' progress={percent} indeterminate={false} color='#43a047'/>}
-              <TouchableOpacity onPress={this.donate} style={styles.button}>
-                <Text style={styles.buttonText}>Donate Now</Text>
-              </TouchableOpacity>
-            </View>
-          }
-        </View>
-      </View>
     );
   }
 
@@ -108,9 +88,6 @@ export default class AboutScreen extends React.Component<{}, IState> {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   image: {
     width: 250,
     height: 50,
@@ -120,12 +97,7 @@ const styles = StyleSheet.create({
   scrollView: {
     padding: 20,
     flex: 1,
-  },
-  titleText: {
-    fontSize: 24,
-    alignSelf: 'center',
-    fontWeight: 'bold',
-    marginBottom: 20,
+    backgroundColor: '#FAFAFA',
   },
   normalText: {
     fontSize: 18,
@@ -140,20 +112,18 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderColor: '#BDBDBD',
   },
-  donationText: {
-      alignSelf: 'center',
-      fontSize: 22,
-  },
   loading: {
 
   },
   button: {
-    backgroundColor: '#43a047',
+    backgroundColor: PRIMARY_COLOR,
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: '#43a047',
-    margin: 10,
+    borderColor: PRIMARY_COLOR,
+    height: 45,
+    marginTop: 5,
     alignItems: 'center',
+    justifyContent: 'center',
     padding: 5,
   },
   buttonText: {

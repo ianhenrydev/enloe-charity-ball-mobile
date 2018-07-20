@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { View, StyleSheet, Dimensions, Platform, WebView } from 'react-native';
-import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
+import { StyleSheet, Dimensions, Platform } from 'react-native';
+import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
+import { PRIMARY_COLOR } from './src/Constants';
 import AboutScreen from './src/AboutScreen';
 import CalendarScreen from './src/CalendarScreen';
 import GalleryScreen from './src/GalleryScreen';
@@ -28,7 +29,7 @@ export default class App extends React.Component<{}, IState> {
   
   private handleIndexChange = (index: Number) => this.setState({ index });
 
-  private renderHeader = (props: any) => <TabBar style={styles.tabBar} indicatorStyle={styles.indicator} {...props}/>;
+  private renderTabBar = (props: any) => <TabBar style={styles.tabBar} indicatorStyle={styles.indicator} {...props}/>;
 
   private renderScene = SceneMap({
     about: () => <AboutScreen/>,
@@ -38,13 +39,14 @@ export default class App extends React.Component<{}, IState> {
 
   render() {
     return (
-      <TabViewAnimated
+      <TabView 
         style={styles.tabView}
         navigationState={this.state}
         renderScene={this.renderScene}
-        renderHeader={this.renderHeader}
+        renderTabBar={this.renderTabBar}
         onIndexChange={this.handleIndexChange}
         initialLayout={initialLayout}
+        tabBarPosition='bottom'
       />
     );
   }
@@ -55,7 +57,7 @@ const styles = StyleSheet.create({
     marginTop: (Platform.OS === 'ios') ? 20 : 0,
   },
   tabBar: {
-    backgroundColor: '#43a047',
+    backgroundColor: PRIMARY_COLOR,
   },
   indicator: {
     backgroundColor: '#00701a',

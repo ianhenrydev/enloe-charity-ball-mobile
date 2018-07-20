@@ -9,10 +9,10 @@
     "version": "0.0.1",
     "slug": "enloe-charity-ball",
     "icon": "./assets/icon.png",
-    "primaryColor": "#43a047",
+    "primaryColor": "#673AB7",
     "androidStatusBar": {
       "barStyle": "light-content",
-      "backgroundColor": "#00701a"
+      "backgroundColor": "#4527A0"
     },
     "splash": {
       "backgroundColor": "#fff",

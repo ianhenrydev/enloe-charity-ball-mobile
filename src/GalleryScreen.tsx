@@ -1,29 +1,48 @@
 import * as React from 'react';
-import { Image, Text, ListView, ListViewDataSource, StyleSheet, View } from 'react-native';
+import { Image, ListView, ListViewDataSource, Text, StyleSheet, View } from 'react-native';
 
 interface IState {
     dataSource: ListViewDataSource;
 }
+
+const IMAGES = [
+    require('../assets/1.jpg'),
+    require('../assets/2.jpg'),
+    require('../assets/3.jpg'),
+    require('../assets/4.jpg'),
+    require('../assets/5.jpg'),
+]
 
 export default class GalleryScreen extends React.Component<{}, IState> {
     constructor(props:any) {
         super(props);
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.state = {
-          dataSource: ds.cloneWithRows(['row 1', 'row 2','row 1', 'row 2','row 1', 'row 2','row 1', 'row 2','row 1', 'row 2','row 1', 'row 2','row 1', 'row 2','row 1', 'row 2',]),
+          dataSource: ds.cloneWithRows(['1', '2','3', '4','5']),
         };
     }
 
     render() {
         return ( 
             <View style={styles.container}>
+                <Text style={{ fontSize: 26, fontWeight: 'bold', marginBottom: 20, marginTop: 20, marginLeft: 20}}>Gallery</Text>
                 <ListView
                     contentContainerStyle={styles.list}
                     dataSource={this.state.dataSource}
-                    renderRow={(rowData) => <View style={styles.item}><Image style={{width: 150, height: 150}} source={require('../assets/icon.png')}/></View>}
+                    renderRow={this.renderRow}
                 />
             </View>
         );
+    }
+
+    private renderRow = (rowData, sectionID, rowID) => {
+        console.log(rowID)
+        const imgSource = IMAGES[rowID]
+        return (
+            <View style={styles.item}>
+                <Image style={{width: 160, height: 160}} source={imgSource}/>
+            </View>
+        )
     }
 }
 
@@ -45,6 +64,5 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#424242',
     margin: 5,
-    padding: 5,
   }
 });

@@ -1,10 +1,15 @@
 import * as React from 'react';
 import { Image, Text, ListView, ListViewDataSource, StyleSheet, View } from 'react-native';
 
-export default class Card extends React.Component<{}> {
+interface Props {
+    title: string;
+}
+
+export default class Card extends React.Component<Props> {
     render() {
         return ( 
             <View style={styles.container}>
+                <Text style={styles.cardTitle}>{this.props.title}</Text>
                 { this.props.children }
             </View>
         );
@@ -13,12 +18,21 @@ export default class Card extends React.Component<{}> {
 
 const styles = StyleSheet.create({
     container: {
-        borderRadius: 3,
         borderWidth: 1,
-        borderColor: '#BDBDBD',
+        borderRadius: 2,
+        borderColor: '#fff',
+        backgroundColor: '#fff',
+        borderBottomWidth: 0,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 2,
+        elevation: 1,
+        marginTop: 10,
         padding: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'row',
+      },
+      cardTitle: {
+        fontSize: 22,
+        marginBottom: 5,
       },
 });
