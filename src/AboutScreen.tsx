@@ -41,6 +41,9 @@ export default class AboutScreen extends React.Component<{}, IState> {
     return ( 
         <ScrollView style={styles.scrollView}>
             <Text style={{ fontSize: 26, fontWeight: 'bold', marginBottom: 20}}>Enloe Charity Ball 2018</Text>
+            <View style={{ flexDirection: 'row'}}>
+              <Image style={{ flex: 1, maxHeight: 200 }} resizeMode='contain' source={require('../assets/banner.png')}/>
+            </View>
             <Card title='Total Raised'>
               <Text style={{ fontSize: 18 }}>{`$${this.state.donationTotal} of $150,000 goal`}</Text>
               { (Platform.OS === 'ios') ? <ProgressViewIOS progress={percent} progressTintColor={PRIMARY_COLOR}/> : <ProgressBarAndroid styleAttr='Horizontal' progress={percent} indeterminate={false} color={PRIMARY_COLOR}/>}
@@ -69,14 +72,7 @@ export default class AboutScreen extends React.Component<{}, IState> {
   }
 
   private donate = () => {
-    Alert.alert(
-      'Coming Soon',
-      'The donation portal will be online soon',
-      [
-        {text: 'OK', onPress: () => console.log('OK Pressed')},
-      ],
-      { cancelable: true }
-    )
+    Linking.openURL('https://charityball.webconnex.com/2018')
   }
 
   private openBlog = () => {

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, Dimensions, Platform } from 'react-native';
+import { Image, StyleSheet, Dimensions, Platform } from 'react-native';
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 import { PRIMARY_COLOR } from './src/Constants';
 import AboutScreen from './src/AboutScreen';
@@ -16,20 +16,28 @@ type IState = {
   routes: {key: string, title: string}[];
 }
 
-const twitter = '<a class="twitter-timeline" href="https://twitter.com/EHSCharityBall?ref_src=twsrc%5Etfw">Tweets by EHSCharityBall</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>';
 export default class App extends React.Component<{}, IState> {
   state = {
     index: 0,
     routes: [
-      { key: 'about', title: 'About' },
-      { key: 'calendar', title: 'Calendar' },
-      { key: 'gallery', title: 'Gallery' }
+      { key: 'about', title: 'About', icon: require('./assets/info.png') },
+      { key: 'calendar', title: 'Calendar', icon: require('./assets/calendar.png') },
+      { key: 'gallery', title: 'Gallery', icon: require('./assets/gallery.png') }
     ],
   };
   
   private handleIndexChange = (index: Number) => this.setState({ index });
 
-  private renderTabBar = (props: any) => <TabBar style={styles.tabBar} indicatorStyle={styles.indicator} {...props}/>;
+  private renderTabBar = (props: any) => (
+    <TabBar
+      {...props}
+      style={styles.tabBar} 
+      indicatorStyle={styles.indicator}
+      /*renderIcon={this.renderIcon}*/
+    />
+  );
+
+  private renderIcon = ({route}) => <Image style={{height: 22, width: 22}} source={route.icon}/>
 
   private renderScene = SceneMap({
     about: () => <AboutScreen/>,
@@ -60,7 +68,7 @@ const styles = StyleSheet.create({
     backgroundColor: PRIMARY_COLOR,
   },
   indicator: {
-    backgroundColor: '#00701a',
+    backgroundColor: '#fff',
   },
   container: {
     flex: 1,
