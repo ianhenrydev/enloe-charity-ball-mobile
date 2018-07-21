@@ -46,7 +46,7 @@ export default class AboutScreen extends React.Component<{}, IState> {
             </View>
             <Card title='Total Raised'>
               <Text style={{ fontSize: 18 }}>{`$${this.state.donationTotal} of $150,000 goal`}</Text>
-              { (Platform.OS === 'ios') ? <ProgressViewIOS progress={percent} progressTintColor={PRIMARY_COLOR}/> : <ProgressBarAndroid styleAttr='Horizontal' progress={percent} indeterminate={false} color={PRIMARY_COLOR}/>}
+              { (Platform.OS === 'ios') ? <ProgressViewIOS style={{ marginTop: 5, marginBottom: 5 }}progress={percent} progressTintColor={PRIMARY_COLOR}/> : <ProgressBarAndroid styleAttr='Horizontal' progress={percent} indeterminate={false} color={PRIMARY_COLOR}/>}
               <TouchableOpacity onPress={this.donate} style={styles.button}>
                 <Text style={styles.buttonText}>Donate Now</Text>
               </TouchableOpacity>

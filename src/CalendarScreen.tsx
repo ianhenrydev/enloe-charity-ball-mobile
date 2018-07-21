@@ -20,25 +20,25 @@ export default class CalendarScreen extends React.Component<{}> {
         />
         <ScrollView style={styles.scrollView}>
           <Card title='Oct 12-14'>
-            <Text>Oct 12-14: Charity Ball Season Kickoff @ Student Council Fall Retreat</Text>
+            <Text style={styles.dateText}>Charity Ball Season Kickoff @ Student Council Fall Retreat</Text>
           </Card>
           <Card title='Oct 15'>
-            <Text>Oct 15: Ticket Sales Open</Text>
+            <Text style={styles.dateText}>Ticket Sales Open</Text>
           </Card>
           <Card title='Nov 27'>
-            <Text>Nov 27: Giving Tuesday (Tentative date for twitter takeover)</Text>
+            <Text style={styles.dateText}>Giving Tuesday (Tentative date for twitter takeover)</Text>
           </Card>
           <Card title='Nov 30'>
-            <Text>Nov 30: Space Jam</Text>
+            <Text style={styles.dateText}>Space Jam</Text>
           </Card>
           <Card title='Dec 1'>
-            <Text>Dec 1: ECB+VAE Art Auction</Text>
+            <Text style={styles.dateText}>ECB+VAE Art Auction</Text>
           </Card>
           <Card title='Dec 2-7'>
-            <Text>Dec 2-7: Charity Week</Text>
+            <Text style={styles.dateText}>Charity Week</Text>
           </Card>
           <Card title='Dec 8'>
-            <Text>Dec 8: Charity Ball and Check Presentation @ Marbles Kids Museum</Text>
+            <Text style={styles.dateText}>Charity Ball and Check Presentation @ Marbles Kids Museum</Text>
           </Card>
           <View style={{height: 30}}/>
         </ScrollView>
@@ -60,7 +60,6 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   dateText: {
-    fontSize: 22,
-    marginBottom: 10,
+    fontSize: 18,
   }
 });
