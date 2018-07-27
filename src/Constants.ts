@@ -7,4 +7,4 @@ export const firebaseConfig = {
     messagingSenderId: "540378669019"
 };
 
-export const PRIMARY_COLOR = '#673AB7';
+export const PRIMARY_COLOR = '#26A69A';

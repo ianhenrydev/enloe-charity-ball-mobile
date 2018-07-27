@@ -37,15 +37,15 @@ export default class AboutScreen extends React.Component<{}, IState> {
   }
 
   render() {
-    const percent = this.state.donationTotal / 150000;
+    const percent = this.state.donationTotal / 200000;
     return ( 
         <ScrollView style={styles.scrollView}>
             <Text style={{ fontSize: 26, fontWeight: 'bold', marginBottom: 20}}>Enloe Charity Ball 2018</Text>
             <View style={{ flexDirection: 'row'}}>
-              <Image style={{ flex: 1, maxHeight: 200 }} resizeMode='contain' source={require('../assets/banner.png')}/>
+              <Image style={{ flex: 1, maxHeight: 200 }} resizeMode='contain' source={require('../assets/banner.jpg')}/>
             </View>
             <Card title='Total Raised'>
-              <Text style={{ fontSize: 18 }}>{`$${this.state.donationTotal} of $150,000 goal`}</Text>
+              <Text style={{ fontSize: 18 }}>{`$${this.state.donationTotal} of $200,000 goal`}</Text>
               { (Platform.OS === 'ios') ? <ProgressViewIOS style={{ marginTop: 5, marginBottom: 5 }}progress={percent} progressTintColor={PRIMARY_COLOR}/> : <ProgressBarAndroid styleAttr='Horizontal' progress={percent} indeterminate={false} color={PRIMARY_COLOR}/>}
               <TouchableOpacity onPress={this.donate} style={styles.button}>
                 <Text style={styles.buttonText}>Donate Now</Text>

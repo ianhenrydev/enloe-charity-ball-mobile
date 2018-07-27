@@ -20,9 +20,9 @@ export default class App extends React.Component<{}, IState> {
   state = {
     index: 0,
     routes: [
-      { key: 'about', title: 'About', icon: require('./assets/info.png') },
-      { key: 'calendar', title: 'Calendar', icon: require('./assets/calendar.png') },
-      { key: 'gallery', title: 'Gallery', icon: require('./assets/gallery.png') }
+      { key: 'about', title: 'About' },
+      { key: 'calendar', title: 'Calendar' },
+      { key: 'gallery', title: 'Gallery' }
     ],
   };
   
