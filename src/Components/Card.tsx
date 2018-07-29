@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Image, Text, ListView, ListViewDataSource, StyleSheet, View } from 'react-native';
+import { Text, StyleSheet, View } from 'react-native';
 
 interface Props {
     title: string;

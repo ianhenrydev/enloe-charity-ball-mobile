@@ -42,7 +42,7 @@ export default class AboutScreen extends React.Component<{}, IState> {
         <ScrollView style={styles.scrollView}>
             <Text style={{ fontSize: 26, fontWeight: 'bold', marginBottom: 20}}>Enloe Charity Ball 2018</Text>
             <View style={{ flexDirection: 'row'}}>
-              <Image style={{ flex: 1, maxHeight: 200 }} resizeMode='contain' source={require('../assets/banner-smol.jpg')}/>
+              <Image style={{ flex: 1, maxHeight: 200 }} resizeMode='contain' source={require('./assets/banner-smol.jpg')}/>
             </View>
             <Card title='Total Raised'>
               <Text style={{ fontSize: 18 }}>{`$${this.state.donationTotal} of $200,000 goal`}</Text>

@@ -6,11 +6,11 @@ interface IState {
 }
 
 const IMAGES = [
-    require('../assets/thumb1.jpg'),
-    require('../assets/thumb2.jpg'),
-    require('../assets/thumb3.jpg'),
-    require('../assets/thumb4.jpg'),
-    require('../assets/thumb5.jpg'),
+    require('./assets/thumb1.jpg'),
+    require('./assets/thumb2.jpg'),
+    require('./assets/thumb3.jpg'),
+    require('./assets/thumb4.jpg'),
+    require('./assets/thumb5.jpg'),
 ]
 
 export default class GalleryScreen extends React.Component<{}, IState> {

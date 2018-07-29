@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { ActivityIndicator, Image, Text, TextInput, TouchableOpacity, StyleSheet, View, ProgressBarAndroid, Platform, ProgressViewIOS, ScrollView } from 'react-native';
-import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
+import { Text, StyleSheet, View, ScrollView } from 'react-native';
+import { Calendar } from 'react-native-calendars';
 import { PRIMARY_COLOR } from './Constants';
 import Card from './Components/Card';
 
