@@ -6,11 +6,11 @@ interface IState {
 }
 
 const IMAGES = [
-    require('./assets/thumb1.jpg'),
-    require('./assets/thumb2.jpg'),
-    require('./assets/thumb3.jpg'),
-    require('./assets/thumb4.jpg'),
-    require('./assets/thumb5.jpg'),
+    'https://firebasestorage.googleapis.com/v0/b/enloe-charity-ball.appspot.com/o/thumb1.jpg?alt=media&token=b38dfbee-458b-45b1-8229-ea9b817391e9',
+    'https://firebasestorage.googleapis.com/v0/b/enloe-charity-ball.appspot.com/o/thumb2.jpg?alt=media&token=0b72f357-d79b-43a2-8d38-32f0000186a9',
+    'https://firebasestorage.googleapis.com/v0/b/enloe-charity-ball.appspot.com/o/thumb3.jpg?alt=media&token=e9004e28-76e2-422d-b0ee-a7fd90099606',
+    'https://firebasestorage.googleapis.com/v0/b/enloe-charity-ball.appspot.com/o/thumb4.jpg?alt=media&token=155b4cbb-1c9c-4050-997d-37c98f6d2add',
+    'https://firebasestorage.googleapis.com/v0/b/enloe-charity-ball.appspot.com/o/thumb5.jpg?alt=media&token=6fe43056-952a-4610-ad34-ec75ce319051',
 ]
 
 export default class GalleryScreen extends React.Component<{}, IState> {
@@ -36,11 +36,10 @@ export default class GalleryScreen extends React.Component<{}, IState> {
     }
 
     private renderRow = (rowData, sectionID, rowID) => {
-        console.log(rowID)
         const imgSource = IMAGES[rowID]
         return (
             <View style={styles.item}>
-                <Image style={{width: 160, height: 160}} source={imgSource}/>
+                <Image style={{width: 160, height: 160}} source={{ uri: imgSource}}/>
             </View>
         )
     }
