@@ -6,11 +6,11 @@ interface IState {
 }
 
 const IMAGES = [
-    require('../assets/1.jpg'),
-    require('../assets/2.jpg'),
-    require('../assets/3.jpg'),
-    require('../assets/4.jpg'),
-    require('../assets/5.jpg'),
+    require('../assets/thumb1.jpg'),
+    require('../assets/thumb2.jpg'),
+    require('../assets/thumb3.jpg'),
+    require('../assets/thumb4.jpg'),
+    require('../assets/thumb5.jpg'),
 ]
 
 export default class GalleryScreen extends React.Component<{}, IState> {
@@ -49,6 +49,7 @@ export default class GalleryScreen extends React.Component<{}, IState> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff',
   },
   list: {
     justifyContent: 'space-around',
