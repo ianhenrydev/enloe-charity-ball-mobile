@@ -6,7 +6,7 @@
       "transformer": "node_modules/react-native-typescript-transformer/index.js"
     },
     "name": "Enloe Charity Ball",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "slug": "enloe-charity-ball",
     "icon": "./assets/icon.png",
     "primaryColor": "#673AB7",
@@ -15,11 +15,13 @@
       "backgroundColor": "#00796B"
     },
     "splash": {
+      "image": "./assets/splash.png",
       "backgroundColor": "#fff",
       "resizeMode": "contain"
     },
     "ios": {
-      "bundleIdentifier": "com.enloestudentcouncil.charityball"
+      "bundleIdentifier": "com.enloestudentcouncil.charityball",
+      "supportsTablet": true
     },
     "android": {
       "package": "com.enloestudentcouncil.charityball"
