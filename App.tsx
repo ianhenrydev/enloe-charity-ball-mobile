@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Image, StyleSheet, Dimensions, Platform } from 'react-native';
+import { Image, Dimensions, SafeAreaView, StyleSheet, Platform } from 'react-native';
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 import { PRIMARY_COLOR } from './src/Constants';
 import AboutScreen from './src/AboutScreen';
@@ -33,7 +33,6 @@ export default class App extends React.Component<{}, IState> {
       {...props}
       style={styles.tabBar} 
       indicatorStyle={styles.indicator}
-      /*renderIcon={this.renderIcon}*/
     />
   );
 
@@ -47,15 +46,17 @@ export default class App extends React.Component<{}, IState> {
 
   render() {
     return (
-      <TabView 
-        style={styles.tabView}
-        navigationState={this.state}
-        renderScene={this.renderScene}
-        renderTabBar={this.renderTabBar}
-        onIndexChange={this.handleIndexChange}
-        initialLayout={initialLayout}
-        tabBarPosition='bottom'
-      />
+      <SafeAreaView style={{flex: 1, backgroundColor: '#FAFAFA'}}>
+        <TabView 
+          style={styles.tabView}
+          navigationState={this.state}
+          renderScene={this.renderScene}
+          renderTabBar={this.renderTabBar}
+          onIndexChange={this.handleIndexChange}
+          initialLayout={initialLayout}
+          tabBarPosition='bottom'
+        />
+      </SafeAreaView>
     );
   }
 }
