@@ -3,7 +3,8 @@ import { Alert, ActivityIndicator, Image, Text, TextInput, TouchableOpacity, Sty
 import firebase from 'firebase';
 require("firebase/firestore");
 import Card from './Components/Card';
-import { firebaseConfig, PRIMARY_COLOR } from './Constants';
+import { PRIMARY_COLOR } from './Constants';
+import { firebaseConfig } from './FirebaseConfig';
 
 type IState = {
   donationTotal: number;
