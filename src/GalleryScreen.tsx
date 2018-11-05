@@ -35,7 +35,7 @@ export default class GalleryScreen extends React.Component<{}, IState> {
         );
     }
 
-    private renderRow = (rowData, sectionID, rowID) => {
+    private renderRow = (rowData: any, sectionID: any, rowID: any) => {
         const imgSource = IMAGES[rowID]
         return (
             <View style={styles.item}>

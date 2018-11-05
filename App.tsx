@@ -36,7 +36,7 @@ export default class App extends React.Component<{}, IState> {
     />
   );
 
-  private renderIcon = ({route}) => <Image style={{height: 22, width: 22}} source={route.icon}/>
+  private renderIcon = ({route}: any) => <Image style={{height: 22, width: 22}} source={route.icon}/>
 
   private renderScene = SceneMap({
     about: () => <AboutScreen/>,
