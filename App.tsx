@@ -2,9 +2,9 @@ import * as React from 'react';
 import { Image, Dimensions, SafeAreaView, StyleSheet, Platform } from 'react-native';
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 import { PRIMARY_COLOR } from './src/Constants';
-import AboutScreen from './src/AboutScreen';
-import CalendarScreen from './src/CalendarScreen';
-import GalleryScreen from './src/GalleryScreen';
+import AboutScreen from './src/screens/AboutScreen';
+import CalendarScreen from './src/screens/CalendarScreen';
+import GalleryScreen from './src/screens/GalleryScreen';
 
 const initialLayout = {
   height: 0,

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Text, StyleSheet, View, ScrollView } from 'react-native';
 import { Calendar } from 'react-native-calendars';
-import { PRIMARY_COLOR } from './Constants';
-import Card from './Components/Card';
+import { PRIMARY_COLOR } from '../../Constants';
+import Card from '../../components/Card';
 
 const selected = {selected: true, selectedColor: PRIMARY_COLOR}
 

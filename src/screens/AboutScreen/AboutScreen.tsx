@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { Alert, ActivityIndicator, Image, Text, TextInput, TouchableOpacity, StyleSheet, View, ProgressBarAndroid, Platform, ProgressViewIOS, ScrollView, Linking } from 'react-native';
+import { ActivityIndicator, Image, Text, TouchableOpacity, StyleSheet, View, ProgressBarAndroid, Platform, ProgressViewIOS, ScrollView, Linking } from 'react-native';
 import firebase from 'firebase';
 require("firebase/firestore");
-import Card from './Components/Card';
-import { PRIMARY_COLOR } from './Constants';
-import { firebaseConfig } from './FirebaseConfig';
+import Card from '../../components/Card/Card';
+import { PRIMARY_COLOR } from '../../Constants';
+import { firebaseConfig } from '../../FirebaseConfig';
 
 type IState = {
   donationTotal: number;
