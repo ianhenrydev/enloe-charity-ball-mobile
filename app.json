@@ -15,9 +15,7 @@
       "backgroundColor": "#fff",
       "resizeMode": "contain"
     },
-    "assetBundlePatterns": [
-      "./src/assets/"
-    ],
+    "assetBundlePatterns": ["./src/assets/"],
     "ios": {
       "bundleIdentifier": "com.enloestudentcouncil.charityball",
       "supportsTablet": true,
