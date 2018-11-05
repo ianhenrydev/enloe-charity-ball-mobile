@@ -1,38 +1,12 @@
 import * as React from 'react'
 import { Text, StyleSheet, View, ScrollView } from 'react-native'
-import { Calendar } from 'react-native-calendars'
-import { PRIMARY_COLOR } from '../../Constants'
 import Card from '../../components/Card'
-
-const selected = { selected: true, selectedColor: PRIMARY_COLOR }
 
 export default class CalendarScreen extends React.Component<{}> {
   render() {
     return (
       <View style={styles.container}>
         <Text style={{ fontSize: 26, fontWeight: 'bold', marginBottom: 20, marginTop: 20, marginLeft: 20 }}>Event Calendar</Text>
-        <Calendar
-          style={styles.scrollView}
-          markedDates={{
-            '2018-08-15': selected,
-            '2018-10-12': selected,
-            '2018-10-13': selected,
-            '2018-10-14': selected,
-            '2018-10-15': selected,
-            '2018-11-27': selected,
-            '2018-11-30': selected,
-            '2018-12-01': selected,
-            '2018-12-02': selected,
-            '2018-12-03': selected,
-            '2018-12-04': selected,
-            '2018-12-05': selected,
-            '2018-12-06': selected,
-            '2018-12-07': selected,
-            '2018-12-08': selected
-          }}
-          minDate={'2018-07-01'}
-          maxDate={'2018-12-31'}
-        />
         <ScrollView style={styles.scrollView}>
           <Card title="Aug 15">
             <Text style={styles.dateText}>Charity Reveal @ HQ Raleigh</Text>
