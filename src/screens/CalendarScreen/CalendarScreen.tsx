@@ -1,40 +1,54 @@
 import * as React from 'react'
-import { Text, StyleSheet, View, ScrollView } from 'react-native'
+import { FlatList, Text, StyleSheet, View, ScrollView } from 'react-native'
 import Card from '../../components/Card'
+import moment from 'moment'
+import firebase from 'firebase'
+require('firebase/firestore')
 
-export default class CalendarScreen extends React.Component<{}> {
+interface Props {}
+
+interface State {
+  events: firebase.firestore.QueryDocumentSnapshot[]
+  loading: boolean
+}
+
+export default class CalendarScreen extends React.Component<Props, State> {
+  private firestore: firebase.firestore.Firestore
+  constructor(props: Props) {
+    super(props)
+    this.state = {
+      events: [],
+      loading: false
+    }
+    this.firestore = firebase.firestore()
+    this.firestore.settings({ timestampsInSnapshots: true })
+  }
+
+  componentDidMount() {
+    this.setState({ loading: true })
+    this.firestore
+      .collection('events')
+      .orderBy('date')
+      .get()
+      .then(result => {
+        this.setState({ events: result.docs })
+      })
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <Text style={{ fontSize: 26, fontWeight: 'bold', marginBottom: 20, marginTop: 20, marginLeft: 20 }}>Event Calendar</Text>
-        <ScrollView style={styles.scrollView}>
-          <Card title="Aug 15">
-            <Text style={styles.dateText}>Charity Reveal @ HQ Raleigh</Text>
-          </Card>
-          <Card title="Oct 12-14">
-            <Text style={styles.dateText}>Charity Ball Season Kickoff @ Student Council Fall Retreat</Text>
-          </Card>
-          <Card title="Oct 15">
-            <Text style={styles.dateText}>Ticket Sales Open</Text>
-          </Card>
-          <Card title="Nov 27">
-            <Text style={styles.dateText}>Giving Tuesday (Tentative date for twitter takeover)</Text>
-          </Card>
-          <Card title="Nov 30">
-            <Text style={styles.dateText}>Space Jam</Text>
-          </Card>
-          <Card title="Dec 1">
-            <Text style={styles.dateText}>ECB+VAE Art Auction</Text>
-          </Card>
-          <Card title="Dec 2-7">
-            <Text style={styles.dateText}>Charity Week</Text>
-          </Card>
-          <Card title="Dec 8">
-            <Text style={styles.dateText}>Charity Ball and Check Presentation @ Marbles Kids Museum</Text>
-          </Card>
-          <View style={{ height: 30 }} />
-        </ScrollView>
+        <FlatList<firebase.firestore.QueryDocumentSnapshot> data={this.state.events} renderItem={this.renderItem} keyExtractor={item => item.id} />
       </View>
+    )
+  }
+
+  private renderItem = ({ item }) => {
+    return (
+      <Card title={moment(item.get('date').toDate()).format('MMM D')}>
+        <Text style={styles.dateText}>{item.get('name')}</Text>
+      </Card>
     )
   }
 }

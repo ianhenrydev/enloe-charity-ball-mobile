@@ -16,34 +16,37 @@ import firebase from 'firebase'
 require('firebase/firestore')
 import Card from '../../components/Card/Card'
 import { PRIMARY_COLOR } from '../../Constants'
-import { firebaseConfig } from '../../FirebaseConfig'
 
 type IState = {
   donationTotal: number
   message: string
+  volunteerHours: number
   loading: boolean
 }
 
 export default class AboutScreen extends React.Component<{}, IState> {
-  state = {
-    donationTotal: 0,
-    message: '',
-    loading: false
+  private firestore: firebase.firestore.Firestore
+  constructor(props: any) {
+    super(props)
+    this.state = {
+      donationTotal: 0,
+      message: '',
+      volunteerHours: 0,
+      loading: false
+    }
+    this.firestore = firebase.firestore()
+    this.firestore.settings({ timestampsInSnapshots: true })
   }
 
   componentDidMount() {
     this.setState({ loading: true })
-    firebase.initializeApp(firebaseConfig)
-    console.log(`Firebase Initialized SDK: ${firebase.SDK_VERSION}`)
-    const firestore = firebase.firestore()
-    firestore.settings({ timestampsInSnapshots: true })
-    firestore
+    this.firestore
       .collection('info')
       .doc('about')
       .get()
       .then(doc => {
         if (doc.exists) {
-          this.setState({ donationTotal: doc.get('donation_total'), message: doc.get('message'), loading: false })
+          this.setState({ donationTotal: doc.get('donation_total'), message: doc.get('message'), volunteerHours: doc.get('volunteer_hours'), loading: false })
         } else {
           console.log('No such document!')
           this.setState({ loading: false })
@@ -60,14 +63,7 @@ export default class AboutScreen extends React.Component<{}, IState> {
       <ScrollView style={styles.scrollView}>
         <Text style={{ fontSize: 26, fontWeight: 'bold', marginBottom: 20 }}>Enloe Charity Ball 2018</Text>
         <View style={{ flexDirection: 'row' }}>
-          <Image
-            style={{ flex: 1, height: 200 }}
-            resizeMode="contain"
-            source={{
-              uri:
-                'https://firebasestorage.googleapis.com/v0/b/enloe-charity-ball.appspot.com/o/banner-smol.jpg?alt=media&token=cb5d6e3b-c9cd-46c1-9eac-8d7f279144c8'
-            }}
-          />
+          <Image style={{ flex: 1, height: 200 }} resizeMode="contain" source={require('../../assets/small-banner.jpg')} />
         </View>
         <Card title="Total Raised">
           <Text style={{ fontSize: 18 }}>{`$${this.state.donationTotal} of $200,000 goal`}</Text>
@@ -79,6 +75,9 @@ export default class AboutScreen extends React.Component<{}, IState> {
           <TouchableOpacity onPress={this.donate} style={styles.button}>
             <Text style={styles.buttonText}>Donate Now</Text>
           </TouchableOpacity>
+        </Card>
+        <Card title="Volunteer Hours">
+          <Text style={{ fontSize: 36 }}>{this.state.volunteerHours}</Text>
         </Card>
         <Card title="Recent News">
           {this.state.loading ? <ActivityIndicator color="#0000ff" /> : <Text style={styles.cardText}>{this.state.message}</Text>}
