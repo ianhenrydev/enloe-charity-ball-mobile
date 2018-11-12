@@ -1,54 +1,67 @@
 import * as React from 'react'
-import { FlatList, Text, StyleSheet, View, ScrollView } from 'react-native'
+import { ActivityIndicator, SectionList, Text, StyleSheet, View, ScrollView } from 'react-native'
 import Card from '../../components/Card'
-import moment from 'moment'
-import firebase from 'firebase'
-require('firebase/firestore')
+import { PRIMARY_COLOR } from '../../Constants'
 
 interface Props {}
 
 interface State {
-  events: firebase.firestore.QueryDocumentSnapshot[]
-  loading: boolean
+  calendar: any[]
 }
 
 export default class CalendarScreen extends React.Component<Props, State> {
-  private firestore: firebase.firestore.Firestore
   constructor(props: Props) {
     super(props)
     this.state = {
-      events: [],
-      loading: false
+      calendar: []
     }
-    this.firestore = firebase.firestore()
-    this.firestore.settings({ timestampsInSnapshots: true })
   }
 
   componentDidMount() {
-    this.setState({ loading: true })
-    this.firestore
-      .collection('events')
-      .orderBy('date')
-      .get()
-      .then(result => {
-        this.setState({ events: result.docs })
-      })
+    const calendar = require('../../../assets/calendar.json')
+    this.setState({ calendar })
   }
 
   render() {
     return (
       <View style={styles.container}>
         <Text style={{ fontSize: 26, fontWeight: 'bold', marginBottom: 20, marginTop: 20, marginLeft: 20 }}>Event Calendar</Text>
-        <FlatList<firebase.firestore.QueryDocumentSnapshot> data={this.state.events} renderItem={this.renderItem} keyExtractor={item => item.id} />
+        {this.state.calendar.length === 0 ? (
+          <ActivityIndicator color="#fff" size="large" />
+        ) : (
+          <SectionList
+            style={{ flex: 1 }}
+            renderItem={this.renderItem}
+            renderSectionHeader={this.renderSectionHeader}
+            sections={this.state.calendar}
+            keyExtractor={(item, index) => item + index}
+            removeClippedSubviews={true}
+            stickySectionHeadersEnabled
+          />
+        )}
       </View>
     )
   }
 
-  private renderItem = ({ item }) => {
+  private renderSectionHeader = ({ section: { title } }: any) => {
     return (
-      <Card title={moment(item.get('date').toDate()).format('MMM D')}>
-        <Text style={styles.dateText}>{item.get('name')}</Text>
-      </Card>
+      <View>
+        <Text style={{ fontSize: 18, color: '#fff', padding: 10, backgroundColor: PRIMARY_COLOR }}>{title}</Text>
+      </View>
+    )
+  }
+
+  private renderItem = ({ item }: any) => {
+    return (
+      <View style={{ flexDirection: 'row', alignItems: 'center', margin: 10 }}>
+        <View style={{ height: 50, width: 50, borderRadius: 25, alignItems: 'center', justifyContent: 'center' }}>
+          <Text style={{ fontSize: 28, color: '#000' }}>{item.date}</Text>
+        </View>
+        <View style={{ marginLeft: 20, marginRight: 50 }}>
+          <Text style={{ fontSize: 18, color: '#000' }}>{item.name}</Text>
+          {item.description && <Text style={{ fontSize: 16, color: '#000' }}>{item.description}</Text>}
+        </View>
+      </View>
     )
   }
 }

@@ -5,7 +5,7 @@ interface IState {
   dataSource: ListViewDataSource
 }
 
-const IMAGES = [require('../../assets/gallery/image1.jpg')]
+const IMAGES = [require('../../../assets/gallery/image1.jpg')]
 
 export default class GalleryScreen extends React.Component<{}, IState> {
   constructor(props: any) {

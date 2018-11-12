@@ -29,7 +29,8 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 1,
     marginTop: 10,
-    padding: 10
+    padding: 10,
+    flex: 1
   },
   cardTitle: {
     fontSize: 22,

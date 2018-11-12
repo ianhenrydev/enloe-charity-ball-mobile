@@ -1,0 +1,92 @@
+[
+  {
+    "title": "August",
+    "data": [
+      {
+        "name": "Charity Reveal at HQ Raleigh",
+        "date": 15
+      }
+    ]
+  },
+  {
+    "title": "October",
+    "data": [
+      {
+        "name": "Charity Ball Season Kickoff at Student Council Fall Retreat",
+        "date": 12
+      },
+      {
+        "name": "Ticket Sales Open",
+        "date": 15
+      }
+    ]
+  },
+  {
+    "title": "November",
+    "data": [
+      {
+        "name": "Twitter Takeover",
+        "date": 9
+      },
+      {
+        "name": "Raleigh Christmas Parade",
+        "date": 17
+      },
+      {
+        "name": "Thanksgiving Challenge",
+        "date": 22
+      },
+      {
+        "name": "Giving Tuesday",
+        "date": 27
+      },
+      {
+        "name": "Boys and Girls Club Open Mic Night",
+        "date": 29
+      },
+      {
+        "name": "Space Jam",
+        "date": 30
+      }
+    ]
+  },
+  {
+    "title": "December",
+    "data": [
+      {
+        "name": "ECB + VAE Art Auction",
+        "date": 1
+      },
+      {
+        "name": "Enloe Film Festival and Charity Ball benefit",
+        "date": 4
+      },
+      {
+        "name": "Dance Ensemble performance at VAE",
+        "date": 4
+      },
+      {
+        "name": "Happy Accidents Improv Comedy at VAE",
+        "date": 5
+      },
+      {
+        "name": "Crescenloe at VAE",
+        "date": 6
+      },
+      {
+        "name": "Celebrity Kickball Game",
+        "date": 6,
+        "description": "Come see local celebrities and politicians play against the winning team from the Student Charity Kickball Tournament"
+      },
+      {
+        "name": "VAE Fundraising for Enloe Charity Ball",
+        "date": 7,
+        "description": "Bar tips for ECB in Downtown Raleigh"
+      },
+      {
+        "name": "Charity Ball and Check Presentation at Marbles Kids Museum",
+        "date": 8
+      }
+    ]
+  }
+]
