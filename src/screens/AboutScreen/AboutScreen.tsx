@@ -82,6 +82,24 @@ export default class AboutScreen extends React.Component<{}, IState> {
         <Card title="Recent News">
           {this.state.loading ? <ActivityIndicator color="#0000ff" /> : <Text style={styles.cardText}>{this.state.message}</Text>}
         </Card>
+        <Card title="2018 Beneficiary: The Autism Society of North Carolina">
+          <Text style={styles.normalText}>
+            On August 15, 2018, Enloe Charity Ball was proud to announce that our beneficiary for 2018 is the Autism Society of North Carolina. The Autism
+            Society, also known as ASNC, not only educates communities about autism, but also supports individuals with autism and their families. They strive
+            to improve the lives of individuals with autism and also help them become more independent. The funds we plan to raise this year for ASNC will be
+            going towards the creation of an IGNITE program in Raleigh.
+          </Text>
+          <TouchableOpacity onPress={() => Linking.openURL('https://www.autismsociety-nc.org/')} style={styles.button}>
+            <Text style={styles.buttonText}>Learn More</Text>
+          </TouchableOpacity>
+        </Card>
+        <Card title="Christmas Parade Float">
+          <Text style={styles.normalText}>
+            Enloe Charity Ball and The Autism Society of NC will have a float in the Raleigh Christmas Parade on November 17th. Our float is sponsored by Alamo
+            Drafthouse and Cinema. Live coverage of the parade on ABC 11!
+          </Text>
+          <Image style={{ flex: 1, height: 150 }} resizeMode="contain" source={require('../../../assets/alamo.png')} />
+        </Card>
         <Card title="Mission">
           <Text style={styles.normalText}>To inspire student leaders and impact our communities through innovative, student-lead solutions.</Text>
         </Card>
@@ -96,11 +114,38 @@ export default class AboutScreen extends React.Component<{}, IState> {
             Raleigh-Wake Partnership to End and Prevent Homelessness.
           </Text>
         </Card>
+        <Card title="House Of Swank+Enloe Charity Ball">
+          <Text style={styles.normalText}>New Enloe Charity Ball merchandise created in partnership with House of Swank Clothing is on sale NOW</Text>
+          <TouchableOpacity onPress={() => Linking.openURL('http://www.houseofswankclothing.com/enloe-charity-ball/')} style={styles.button}>
+            <Text style={styles.buttonText}>Shop</Text>
+          </TouchableOpacity>
+        </Card>
+        <Card title="Art With Purpose">
+          <Text style={styles.normalText}>
+            Enloe Charity Ball will be hosting an art experience during Charity Week (December 1-7) at the Raleigh Visual Art Exchange. The interactive exhibit
+            will kick-off with a 21+ party on December 1st. Student performances on every weeknight of the experience leading up to Enloe Charity Ball on the
+            8th. Check our calendar for performance schedule!
+          </Text>
+          <TouchableOpacity onPress={() => Linking.openURL('https://visualartexchange.wufoo.com/forms/qqoyds3196d9oe/')} style={styles.button}>
+            <Text style={styles.buttonText}>Buy Tickets</Text>
+          </TouchableOpacity>
+        </Card>
+        <Card title="Oak City Open Mic Night">
+          <Text style={styles.normalText}>
+            Enloe Charity Ball will be hosting their second annual Open Mic Night at The Boys and Girls Club Teen Center on November 29th at 5pm. There will be
+            performances of all kinds including poetry, stand up comedy, and live music. All of the event’s proceeds will go towards the Autism Society of North
+            Carolina.
+          </Text>
+          <Image style={{ width: 300, height: 390, alignSelf: 'center' }} resizeMode="contain" source={require('../../../assets/openmic.jpg')} />
+        </Card>
         <TouchableOpacity onPress={this.openBlog} style={styles.button}>
           <Text style={styles.buttonText}>Blog</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={this.openTwitter} style={styles.button}>
           <Text style={styles.buttonText}>Twitter</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => Linking.openURL('https://www.instagram.com/enloecharityball/?hl=en')} style={styles.button}>
+          <Text style={styles.buttonText}>Instagram</Text>
         </TouchableOpacity>
         <View style={{ height: 30 }} />
       </ScrollView>
