@@ -1,35 +1,37 @@
 import * as React from 'react'
-import { Image, ListView, ListViewDataSource, Text, StyleSheet, View } from 'react-native'
+import { Image, FlatList, ListViewDataSource, Text, StyleSheet, View } from 'react-native'
 
 interface IState {
   dataSource: ListViewDataSource
 }
 
-const IMAGES = [require('../../../assets/gallery/image1.jpg')]
+const IMAGES = [
+  { image: require('../../../assets/gallery/1.jpg') },
+  { image: require('../../../assets/gallery/2.jpg') },
+  { image: require('../../../assets/gallery/3.jpg') },
+  { image: require('../../../assets/gallery/4.jpg') },
+  { image: require('../../../assets/gallery/5.jpg') },
+  { image: require('../../../assets/gallery/6.jpg') }
+]
 
 export default class GalleryScreen extends React.Component<{}, IState> {
   constructor(props: any) {
     super(props)
-    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
-    this.state = {
-      dataSource: ds.cloneWithRows(['1', '2', '3', '4', '5'])
-    }
   }
 
   render() {
     return (
       <View style={styles.container}>
         <Text style={{ fontSize: 26, fontWeight: 'bold', marginBottom: 20, marginTop: 20, marginLeft: 20 }}>Gallery</Text>
-        <ListView contentContainerStyle={styles.list} dataSource={this.state.dataSource} renderRow={this.renderRow} />
+        <FlatList data={IMAGES} renderItem={this.renderItem} keyExtractor={(item, index) => `item${index}`} />
       </View>
     )
   }
 
-  private renderRow = (rowData: any, sectionID: any, rowID: any) => {
-    const imgSource = IMAGES[rowID]
+  private renderItem = ({ item }) => {
     return (
-      <View style={styles.item}>
-        <Image style={{ width: 160, height: 160 }} source={imgSource} />
+      <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
+        <Image style={{ flex: 1, height: 250 }} resizeMode="contain" source={item.image} />
       </View>
     )
   }
