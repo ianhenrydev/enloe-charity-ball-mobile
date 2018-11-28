@@ -1,17 +1,37 @@
 import * as React from 'react'
-import { Image, FlatList, ListViewDataSource, Text, StyleSheet, View } from 'react-native'
+import { Linking, Image, FlatList, ListViewDataSource, Text, StyleSheet, View, TouchableOpacity } from 'react-native'
 
 interface IState {
   dataSource: ListViewDataSource
 }
 
 const IMAGES = [
+  {
+    image: require('../../../assets/gallery/v1.jpg'),
+    link: 'https://youtu.be/0IwUbHWWEWo',
+    title: 'The IGNITE program'
+  },
+  {
+    image: require('../../../assets/gallery/v2.jpg'),
+    link: 'https://www.youtube.com/watch?v=Y_t1wRKliic',
+    title: 'Enloe Charity Ball 2017'
+  },
+  {
+    image: require('../../../assets/gallery/v3.jpg'),
+    link: 'https://www.youtube.com/watch?v=JeZme-nFGN4',
+    title: 'Enloe HS Charity Ball 2017'
+  },
   { image: require('../../../assets/gallery/1.jpg') },
   { image: require('../../../assets/gallery/2.jpg') },
   { image: require('../../../assets/gallery/3.jpg') },
   { image: require('../../../assets/gallery/4.jpg') },
   { image: require('../../../assets/gallery/5.jpg') },
-  { image: require('../../../assets/gallery/6.jpg') }
+  { image: require('../../../assets/gallery/6.jpg') },
+  { image: require('../../../assets/gallery/7.jpg') },
+  { image: require('../../../assets/gallery/8.jpg') },
+  { image: require('../../../assets/gallery/9.jpg') },
+  { image: require('../../../assets/gallery/10.jpg') },
+  { image: require('../../../assets/gallery/11.jpg') }
 ]
 
 export default class GalleryScreen extends React.Component<{}, IState> {
@@ -28,10 +48,13 @@ export default class GalleryScreen extends React.Component<{}, IState> {
     )
   }
 
-  private renderItem = ({ item }) => {
+  private renderItem = ({ item }: any) => {
     return (
-      <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
-        <Image style={{ flex: 1, height: 250 }} resizeMode="contain" source={item.image} />
+      <View style={{ margin: 10 }}>
+        {item.title && <Text style={{ fontSize: 18 }}>{item.title}</Text>}
+        <TouchableOpacity style={{ flex: 1, flexDirection: 'row' }} onPress={() => Linking.openURL(item.link)} disabled={!item.link}>
+          <Image style={{ flex: 1, height: 250 }} resizeMode="contain" source={item.image} />
+        </TouchableOpacity>
       </View>
     )
   }

@@ -2,7 +2,7 @@
   "expo": {
     "sdkVersion": "31.0.0",
     "name": "Enloe Charity Ball",
-    "version": "1.0.5",
+    "version": "2.0.0",
     "slug": "enloe-charity-ball",
     "icon": "./assets/icon.png",
     "primaryColor": "#673AB7",
@@ -15,7 +15,7 @@
       "backgroundColor": "#fff",
       "resizeMode": "contain"
     },
-    "assetBundlePatterns": ["./assets/"],
+    "assetBundlePatterns": ["./assets/*"],
     "ios": {
       "bundleIdentifier": "com.enloestudentcouncil.charityball",
       "supportsTablet": true,
@@ -23,7 +23,7 @@
     },
     "android": {
       "package": "com.enloestudentcouncil.charityball",
-      "versionCode": 7
+      "versionCode": 8
     }
   }
 }
